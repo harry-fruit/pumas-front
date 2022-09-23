@@ -1,0 +1,11 @@
+section.formSection {
+    width: 90%;
+    background-color: red;
+    /* padding: vh 0; */
+
+}
+
+form.form {
+    width: 100%;
+    background-color: yellow;
+}
