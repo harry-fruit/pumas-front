@@ -9,6 +9,8 @@ const Login = () => {
     </Head>
         <div id={style.container}>
 
+            <div className={style.drinksBackground}/>
+
             <div id={style.principal}>
 
                 <div className={style.logo}/>
