@@ -15,6 +15,29 @@ a {
   box-sizing: border-box;
 }
 
+.btn {
+  flex: 1 1 auto;
+  margin: 10px;
+  padding: 30px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  box-shadow: 0 0 20px #eee;
+  border-radius: 10px;
+ }
+
+.btn:hover {
+  border: none;
+  color: white;
+  background-position: right center; 
+}
+
+.btnCustom {
+  background-image: linear-gradient(to right, #e51b23 0%, #e86d71 51%, #e51b23 100%);
+}
+
 .mainContainer {
   height: 100vh;
   background-color: blue;

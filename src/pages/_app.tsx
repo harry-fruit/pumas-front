@@ -2,6 +2,7 @@ import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import Head from 'next/head';
 import Script from 'next/script';
+import Icon from '../public/images/PumaIcon.png'
 import 'devextreme/dist/css/dx.light.css';
 
 function MyApp({ Component, pageProps }: AppProps) {
