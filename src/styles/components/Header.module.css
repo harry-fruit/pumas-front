@@ -1,0 +1,16 @@
+.pumaIcon {
+    width: 100px;
+    height: 50px;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-image: url(../../public/images/PumaIcon.png);
+}
+
+.marginRight {
+    margin-right: 20px;
+}
+
+.userIcons {
+    font-size: 22px;
+}
