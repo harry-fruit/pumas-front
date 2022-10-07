@@ -1,4 +1,4 @@
-import style from '../../styles/register/User.module.css'
+import style from '../../styles/register/User.module.css';
 
 const User = () => {
     return (
