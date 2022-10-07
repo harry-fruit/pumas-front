@@ -56,7 +56,7 @@ export const Footer = () => {
           </section>
         
           <div className="text-center p-4">
-            2022, <b>Puma's Delivery ©</b>
+            2022, <b>Puma&apos;s Delivery ©</b>
           </div>
         </footer>
     )

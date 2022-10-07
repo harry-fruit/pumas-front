@@ -21,7 +21,7 @@ const Login = () => {
 
                 <div className={style.logo}/>
 
-                <button className={style.botaoParceiro}><b>Seja um parceiro da Pumas Delivery</b></button>
+                <button className={style.botaoParceiro}><b>Seja um parceiro da Puma&apos;s Delivery</b></button>
 
                 <h2>Entrar na conta <br/> com e-mail e senha</h2>
 
