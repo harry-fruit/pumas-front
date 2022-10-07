@@ -1,7 +1,13 @@
+import axios from 'axios';
 import Head from 'next/head';
 import style from '../../styles/auth/Login.module.css';
 
 const Login = () => {
+    // const handlePost = async (e:any) =>  {
+    //     const responseawait axios.post('localhost:3001/auth/login', { Login: 'test', Password: 'test' })
+    //     alert('hey')
+    // };
+    
     return (
     <>
     <Head>
@@ -19,9 +25,9 @@ const Login = () => {
 
                 <h2>Entrar na conta <br/> com e-mail e senha</h2>
 
-                <form action="TODO">
-                    <input type="email" placeholder="E-mail" required/>
-                    <input type="password" placeholder="Senha" required/>
+                <form action={`${process.env.URL_BASE}/auth/login`} method='post'>
+                    <input type="text" name="Login" placeholder="Login" required/>
+                    <input type="password" name="Password" placeholder="Senha" required/>
                     <button type="submit" className={`btn btnCustom`}>Entrar</button>
                 </form>
 

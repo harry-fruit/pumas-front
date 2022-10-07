@@ -1,0 +1,62 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    background-color: green;
+    flex-wrap: wrap;
+}
+
+.main .minhaCesta {
+    width: 100%;
+    background-color: blue;
+}
+
+.main .minhaCesta .produtosTable {
+    width: 100%;
+    background-color: red;
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+.main .minhaCesta .produtosTable td,
+.main .minhaCesta .produtosTable th {
+    border: 1px solid black;
+    padding: 5px;
+    text-align: center;
+}
+
+.main .resumoPedido {
+    width: 100%;
+    min-height: 20vh;
+    background-color: yellow;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+
+/* .main .resumoPedido h1 {
+    text-align: center;
+    width: 80%;
+    padding: 5px 10px;
+} */
+
+/* .main .resumoPedido div {
+    width: 80%;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+} */
+
+
+/* @media (min-width: 1200px) {
+    .main {
+        flex-direction: row;
+        background-color: green;
+        flex-wrap: wrap;
+    }
+
+} */
