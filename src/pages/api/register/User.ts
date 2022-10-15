@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 import { NextApiRequest, NextApiResponse } from "next";
 import { encrypt } from "../../../util/Bcrypt";
-import { ReasonPhrases, StatusCodes } from 'http-status-codes';
+import { ReasonPhrases, StatusCodes } from "http-status-codes";
 
 type formData = {
   FirstName: string;
@@ -12,16 +12,6 @@ type formData = {
   Cpf: string;
   Password: string;
   ConfirmPassword: string;
-};
-
-type Payload = {
-  FirstName: string;
-  LastName: string;
-  Email: string;
-  Gender: string;
-  Phone: string;
-  Cpf: string;
-  Password: string;
 };
 
 const handler = async (
@@ -37,7 +27,7 @@ const handler = async (
   console.log(verifiedData);
 
   if (Password != ConfirmPassword) {
-    response.statusCode = StatusCodes.BAD_REQUEST ;
+    response.statusCode = StatusCodes.BAD_REQUEST;
     response.statusMessage = ReasonPhrases.BAD_REQUEST;
 
     return response.send({ error: true, message: "Password doesn't match" });
@@ -45,13 +35,16 @@ const handler = async (
     response.statusCode = StatusCodes.NOT_ACCEPTABLE;
     response.statusMessage = ReasonPhrases.NOT_ACCEPTABLE;
 
-    let existsName:string = '';
+    let existsName: string = "";
 
-    if (verifiedData.existsCpf) existsName = 'Cpf';
-    if (verifiedData.existsEmail) existsName = 'Email';
-    if (verifiedData.existsPhone) existsName = 'Phone';
+    if (verifiedData.existsCpf) existsName = "Cpf";
+    if (verifiedData.existsEmail) existsName = "Email";
+    if (verifiedData.existsPhone) existsName = "Phone";
 
-    return response.send({ error: true, message: `${existsName} Already Exists` });
+    return response.send({
+      error: true,
+      message: `${existsName} Already Exists`,
+    });
   } else {
     const { ConfirmPassword, ...payload } = request.body as formData;
 
@@ -60,7 +53,6 @@ const handler = async (
     const result: AxiosResponse = await axios.post(createUserUrl, payload);
     return response.send(result.data);
   }
-
 };
 
 const existsData = async (Cpf: string, Email: string, Phone: string) => {
@@ -70,20 +62,16 @@ const existsData = async (Cpf: string, Email: string, Phone: string) => {
     validatePhoneUrl: `${process.env.URL_BASE}/user/get-by-phone/${Phone}`,
   };
 
-  const existsCpf = !!((await axios.get(urls.validateCpfUrl)).data).data;
-  const existsEmail = !!((await axios.get(urls.validateEmailUrl)).data).data;
-  const existsPhone = !!((await axios.get(urls.validatePhoneUrl)).data).data;
+  const existsCpf = !!(await axios.get(urls.validateCpfUrl)).data.data;
+  const existsEmail = !!(await axios.get(urls.validateEmailUrl)).data.data;
+  const existsPhone = !!(await axios.get(urls.validatePhoneUrl)).data.data;
 
-  console.log(existsCpf)
-  console.log(existsEmail)
-  console.log(existsPhone)
-
-  return { 
-    existsCpf, 
-    existsEmail, 
-    existsPhone, 
-    isValid: !existsCpf && !existsEmail && !existsPhone
- };
+  return {
+    existsCpf,
+    existsEmail,
+    existsPhone,
+    isValid: !existsCpf && !existsEmail && !existsPhone,
+  };
 };
 
 export default handler;
