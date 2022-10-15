@@ -1,55 +1,53 @@
 
 .main {
     width: 100%;
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
-.imagemPrincipal {
+/* .imagemPrincipal {
     background-image: url('../../public/images/bgDrinks.jpg');
     width: 100%;
     height: 100%;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-}
+} */
 
-.container {
-    width: 80%;
-    min-height: 80vh;
+.main .container {
+    width: 100%;
     display: flex;
+    justify-content: center;
+    align-items: center;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.212);
     /* background-color: ; */
 }
 
-.formImage {
-    width: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #fde3a7d7;
-    padding: 1rem;
-}
-
-.form {
-    width: 50%;
+.container .formContainer {
+    width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    background-color: #fff;
-    padding: 3rem;
+    padding: 3vh 0;
+    gap: 2vh;
 }
 
-.formHeader {
-    margin-bottom: 3rem;
+.container .formContainer form {
+    gap: 4vh;
+    width: 100%;
+    height: fit-content;
+}
+ .formHeader {
+    width: 100%;
+    height: 10vh;
     display: flex;
-    justify-content: space-between;
+    justify-content: end;
+    padding-right: 5vw;
 }
 
-.loginButton {
+ .loginButton {
     display: flex;
     align-items: center;
 }
@@ -57,24 +55,18 @@
 .loginButton button {
     border: none;
     background-color: #e51b23;
-    padding: 1vh 4vw;
+    padding: 1vh 10vw;
     border-radius: 5px;
     cursor: pointer;
     height: 100%;
-    font-size: 1em;
+    font-size: 1.2em;
     color:  white;
 }
 
 .loginButton button:hover {
     background-color: white;
-    color: #e51b23;
     border: 1px solid #e51b23;
 }
-
-.loginButton button:hover a {
-    color: #e51b23;
-} 
-
 
 .loginButton button a {
     text-decoration: none;
@@ -82,7 +74,17 @@
     color: #fff;
 }
 
-.formHeader h1::after {
+.title {
+    width: 100%;
+}
+
+.title h1 {
+    width: 100%;
+    padding: 0 20vw;
+    position: relative;
+}
+
+.title h1::after {
     content: '';
     display: block;
     width: 5rem;
@@ -94,26 +96,30 @@
 }
 
 .inputGroup {
+    width: 100%;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    padding: 1rem 0;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2vh;
+    padding: 1rem 0; 
 }
 
 .inputBox {
     display: flex;
+    width: 50%;
     flex-direction: column;
-    margin-bottom: 1.1rem;
 }
 
-.inputBox input {
+.inputBox input,
+.inputBox select {
     margin: 0.6rem 0;
     padding: 0.8rem 1.2rem;
     border: none;
     border-radius: 10px;
     box-shadow: 1px 1px 6px #0000001c;
-    font-size: 0.8rem;
-}
+    font-size: 1rem;
+} 
 
 .inputBox input:hover {
     background-color: #eeeeee75;
@@ -121,11 +127,10 @@
 
 .inputBox input:focus-visible {
     outline: 1px solid #e51b23;
-}
+} 
 
-.inputBox label,
-.genderTitle h6 {
-    font-size: 0.75rem;
+.inputBox label {
+    font-size: 1rem;
     font-weight: 600;
     color: #000000c0;
 }
@@ -134,31 +139,14 @@
     color: #000000be;
 }
 
-.genderGroup {
+.continueButton {
     display: flex;
-    justify-content: space-between;
-    margin-top: 0.62rem;
-    padding: 0 .5rem;
-}
-
-.genderInput {
-    display: flex;
+    flex-direction: column;
     align-items: center;
-}
-
-.genderInput input {
-    margin-right: 0.35rem;
-}
-
-.genderInput label {
-    font-size: 0.81rem;
-    font-weight: 600;
-    color: #000000c0;
-}
-
-.continueButton button {
-    width: 100%;
-    margin-top: 2.5rem;
+    justify-content: center;
+    height: fit-content;
+    
+    width: 50%;
     border: none;
     background-color: #e51b23;
     color: white;
@@ -167,49 +155,207 @@
     cursor: pointer;
 }
 
-
-.continueButton button a {
-    text-decoration: none;
-    font-size: 0.93rem;
-    font-weight: 500;
-    color: #fff;
-}
-
-@media screen and (max-width: 1330px) {
+/* @media screen and (min-width: 1200px) {
     .formImage {
         display: none;
     }
     .container {
         width: 50%;
     }
-    .form {
+    .formContainer {
         width: 100%;
+    }
+}   */
+
+@media screen and (min-width: 800px) {
+    
+    .formContainer {
+        padding: 10vh 0vw;
+    }
+    
+    .formContainer form {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        width: 80%;
+    }
+
+    .title h1 {
+        padding: 0 2vw;
+        font-size: 2.75rem;
+    }
+
+    .inputGroup {
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-evenly;
+        gap: 2vh;
+    }
+
+    .inputBox {
+        width: 40%;
+    }
+    
+    .inputBox input {
+        font-size: 1.4rem;
+    } 
+
+    .inputBox label{
+        font-size: 1.4rem;
+    }
+
+    .loginButton button {
+        font-size: 1.4rem;
+    }
+
+    .formContainer button.continueButton {
+        font-size: 1.4rem;
     }
 }
 
-@media screen and (max-width: 1064px) {
-    .container {
-        width: 90%;
-        height: auto;
+@media screen and (min-width: 1400px) {
+    
+
+    .main {
+        justify-content:initial;
+        align-items: initial;
     }
-    .inputGroup {
-        flex-direction: column;
-        z-index: 5;
-        padding-right: 5rem;
-        max-height: 10rem;
+
+    .main .formImage {
+        width: 50%;
+        min-height: 100vh;
+        background-image: url('../../public/images/bgDrinks.jpg');
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+
+    .main .container {
+        height: 100vh;
+    }
+    
+    .container .formContainer {
+        padding: 10vh 0;
+        width: 60%;
+        max-height: 100vh;
         overflow-y: scroll;
-        flex-wrap: nowrap;
     }
-    .genderInputs {
-        margin-top: 2rem;
+    
+    .container .formContainer form {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        width: 80%;
+        max-height: 100vh;
     }
-    .genderGroup {
-        flex-direction: column;
+
+    .title h1 {
+        padding: 0 2vw;
+        font-size: 2.75rem;
     }
-    .genderTitle h6 {
-        margin: 0;
+
+    .inputGroup {
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-evenly;
+        gap: 2vh;
     }
-    .genderInput {
-        margin-top: 0.5rem;
+    
+    .inputBox input {
+        font-size: 1.4rem;
+    } 
+
+    .inputBox label{
+        font-size: 1.4rem;
+    }
+
+    .loginButton button {
+        font-size: 1.4rem;
+    }
+
+    .formContainer button.continueButton {
+        font-size: 1.4rem;
+    }
+}
+
+@media screen and (min-width: 1400px) {
+    
+
+    .main {
+        justify-content:initial;
+        align-items: initial;
+    }
+
+    .main .formImage {
+        width: 50%;
+        min-height: 100vh;
+        background-image: url('../../public/images/bgDrinks.jpg');
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+
+    .main .container {
+        max-height: 100vh;
+    }
+    
+    .container .formContainer {
+        padding: 0vh 0;
+        max-height: 100vh;
+        width: 60%;
+        overflow-y: auto;
+    }
+    
+    .container .formContainer form {
+        display: flex;
+        max-height: 100vh;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: flex;
+        justify-content: center;
+        width: 80%;
+        max-height: 100vh;
+    }
+
+    .title h1 {
+        padding: 0 2vw;
+        font-size: 2.50rem;
+    }
+    
+    .inputGroup {
+        padding-left: 2vw;
+        flex-direction: row;
+        max-height: 100vh;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 2vh;
+    }
+    
+    .inputBox input {
+        font-size: 1rem;
+    } 
+
+    .inputBox label{
+        font-size: 1rem;
+    }
+
+    .loginButton button {
+        padding: 0vh 4vw;
+        font-size: 0.9rem;
+        height: 8vh;
+    }
+
+    .formContainer button.continueButton {
+        font-size: 1rem;
+        margin-right: 4vw;
+        width: 25%;
+        align-self: flex-end;
     }
 }
