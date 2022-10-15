@@ -227,7 +227,7 @@
     .main .formImage {
         width: 50%;
         min-height: 100vh;
-        background-image: url('../../public/images/bgDrinks.jpg');
+        background-image: url('../../../public/images/bgDrinks.jpg');
         background-position: center;
         background-size: cover;
         background-repeat: no-repeat;
@@ -295,7 +295,7 @@
     .main .formImage {
         width: 50%;
         min-height: 100vh;
-        background-image: url('../../public/images/bgDrinks.jpg');
+        background-image: url('../../../public/images/bgDrinks.jpg');
         background-position: center;
         background-size: cover;
         background-repeat: no-repeat;
