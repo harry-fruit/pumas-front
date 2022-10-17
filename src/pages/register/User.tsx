@@ -1,10 +1,70 @@
 import Head from "next/head";
-import { useState } from "react";
+import { BaseSyntheticEvent, useState } from "react";
 import style from "../../styles/register/User.module.css";
+import { formData } from "../../util/FormData";
 
 const User = () => {
+  const [useValidFields, setValidFields] = useState({
+    Email: false,
+    Cpf: false,
+    Phone: false,
+  });
 
-    return (
+  const [useLastValidatedFields, setLastValidatedFields] = useState({
+    Email: "",
+    Cpf: "",
+    Phone: "",
+  });
+
+  const verifyInputedData = async (event: BaseSyntheticEvent) => {
+    event.preventDefault();
+
+    const element = event.target;
+
+    if (
+        element.value
+        && element.value != useLastValidatedFields[element.name]
+      )
+     {
+      const result = await (
+        await fetch(`/api/validate/user?${element.name}=${element.value}`)
+      ).json();
+
+      setValidFields({
+        ...useValidFields,
+        [element.name]: result.isValid,
+      });
+
+      setLastValidatedFields({
+        ...useLastValidatedFields,
+        [element.name]: element.value,
+      });
+
+      if (!result.isValid) {
+        element.setCustomValidity(`${element.name} já cadastrado.`);
+        element.reportValidity();
+      }
+    } else {
+      if (!useValidFields[element.name]) {
+        element.setCustomValidity(`${element.name} já cadastrado.`);
+        element.reportValidity();
+      }
+    }
+  };
+
+  const handleSubmit = async (event: BaseSyntheticEvent) => {
+    const { Email, Cpf, Phone } = useValidFields;
+
+    if (Email && Cpf && Phone) {
+      const data = formData(event.target);
+      await fetch("/api/register/user", {
+        body: JSON.stringify(data),
+        method: "post",
+      });
+    }
+  };
+
+  return (
     <>
       <Head>
         <title>Cadastro de Usuário</title>
@@ -20,7 +80,7 @@ const User = () => {
                 <button className={`btn btnCustom`}>Entrar</button>
               </div>
             </div>
-            <form action={"/api/register/User"} method="post">
+            <form onSubmit={handleSubmit}>
               <div className={style.title}>
                 <h1>Cadastre-se</h1>
               </div>
@@ -58,6 +118,7 @@ const User = () => {
                     placeholder="Digite seu e-mail"
                     required
                     maxLength={150}
+                    onBlur={verifyInputedData}
                   />
                 </div>
 
@@ -70,6 +131,7 @@ const User = () => {
                     placeholder="Digite seu CPF"
                     required
                     maxLength={15}
+                    onBlur={verifyInputedData}
                   />
                 </div>
 
@@ -94,6 +156,7 @@ const User = () => {
                     placeholder="(xx) xxxx-xxxx"
                     required
                     maxLength={15}
+                    onBlur={verifyInputedData}
                   />
                 </div>
 

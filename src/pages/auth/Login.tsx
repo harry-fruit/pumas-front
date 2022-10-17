@@ -25,8 +25,8 @@ const Login = () => {
 
                 <h2>Entrar na conta <br/> com e-mail e senha</h2>
 
-                <form action={`${process.env.URL_BASE}/auth/login`} method='post'>
-                    <input type="text" name="Login" placeholder="Login" required/>
+                <form action={`${process.env.API_URL_BASE}/auth/login`} method='post'>
+                    <input type="text" name="Email" placeholder="Email" required/>
                     <input type="password" name="Password" placeholder="Senha" required/>
                     <button type="submit" className={`btn btnCustom`}>Entrar</button>
                 </form>
