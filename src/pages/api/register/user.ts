@@ -2,6 +2,7 @@ import axios, { AxiosResponse } from "axios";
 import { NextApiRequest, NextApiResponse } from "next";
 import { encrypt } from "../../../util/Bcrypt";
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
+import { NextResponse } from "next/server";
 
 type formData = {
   FirstName: string;
@@ -30,13 +31,15 @@ const handler = async (
   } else {
     const { ConfirmPassword, ...payload } = body as formData;
     payload.Password = encrypt(payload.Password);
-
     const result: AxiosResponse = await axios.post(createUserUrl, payload);
 
     if (result.data.error) {
       throw new Error('Erro ao criar usuario')
     } else {
-      return response.redirect(`http://localhost:3000/auth/Login`);
+      response.statusCode = StatusCodes.CREATED;
+      response.statusMessage = ReasonPhrases.CREATED;
+      
+      return response.send({ error: true, message: "User Created" });
     }
   }
 };

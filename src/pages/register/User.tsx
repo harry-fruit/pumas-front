@@ -1,4 +1,6 @@
+import { StatusCodes } from "http-status-codes";
 import Head from "next/head";
+import Router from "next/router";
 import { BaseSyntheticEvent, useState } from "react";
 import style from "../../styles/register/User.module.css";
 import { formData } from "../../util/FormData";
@@ -20,7 +22,6 @@ const User = () => {
     event.preventDefault();
 
     const element = event.target;
-
     if (
         element.value
         && element.value != useLastValidatedFields[element.name]
@@ -41,12 +42,15 @@ const User = () => {
       });
 
       if (!result.isValid) {
-        element.setCustomValidity(`${element.name} já cadastrado.`);
+        element.setCustomValidity(`${element.name} já está em uso.`);
+        element.reportValidity();
+      } else {
+        element.setCustomValidity('');
         element.reportValidity();
       }
     } else {
       if (!useValidFields[element.name]) {
-        element.setCustomValidity(`${element.name} já cadastrado.`);
+        element.setCustomValidity(`${element.name} já está em uso.`);
         element.reportValidity();
       }
     }
@@ -54,13 +58,24 @@ const User = () => {
 
   const handleSubmit = async (event: BaseSyntheticEvent) => {
     const { Email, Cpf, Phone } = useValidFields;
-
+    event.preventDefault();
+    
+    console.log(Email)
+    console.log(Cpf)
+    console.log(Phone)
+    
     if (Email && Cpf && Phone) {
       const data = formData(event.target);
-      await fetch("/api/register/user", {
+      
+      const response = (await fetch("/api/register/user", {
         body: JSON.stringify(data),
         method: "post",
-      });
+      }));
+
+      if (response.status === StatusCodes.CREATED) {
+        Router.push('/auth/Login')
+      };
+
     }
   };
 
