@@ -48,6 +48,22 @@ a {
   align-items: center;
 }
 
+.invalidInput {
+  border: 2px solid red!important;
+}
+.invalidInput:focus {
+  border: 2px solid red!important;
+}
+
+.validInput:focus {
+  border: 2px solid green!important;
+}
+
+.validInput {
+  border: 2px solid green!important;
+}
+
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;

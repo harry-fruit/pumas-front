@@ -1,15 +1,16 @@
 import { StatusCodes } from "http-status-codes";
+import _ from "lodash";
 import Head from "next/head";
 import Router from "next/router";
 import { BaseSyntheticEvent, useState } from "react";
 import style from "../../styles/register/User.module.css";
-import { formData } from "../../util/FormData";
+import { formData, getVerifiedInputClass, verifyInputedData } from "../../util/Form";
 
 const User = () => {
   const [useValidFields, setValidFields] = useState({
-    Email: false,
-    Cpf: false,
-    Phone: false,
+    Email: null,
+    Cpf: null,
+    Phone: null,
   });
 
   const [useLastValidatedFields, setLastValidatedFields] = useState({
@@ -18,51 +19,9 @@ const User = () => {
     Phone: "",
   });
 
-  const verifyInputedData = async (event: BaseSyntheticEvent) => {
-    event.preventDefault();
-
-    const element = event.target;
-    if (
-        element.value
-        && element.value != useLastValidatedFields[element.name]
-      )
-     {
-      const result = await (
-        await fetch(`/api/validate/user?${element.name}=${element.value}`)
-      ).json();
-
-      setValidFields({
-        ...useValidFields,
-        [element.name]: result.isValid,
-      });
-
-      setLastValidatedFields({
-        ...useLastValidatedFields,
-        [element.name]: element.value,
-      });
-
-      if (!result.isValid) {
-        element.setCustomValidity(`${element.name} já está em uso.`);
-        element.reportValidity();
-      } else {
-        element.setCustomValidity('');
-        element.reportValidity();
-      }
-    } else {
-      if (!useValidFields[element.name]) {
-        element.setCustomValidity(`${element.name} já está em uso.`);
-        element.reportValidity();
-      }
-    }
-  };
-
-  const handleSubmit = async (event: BaseSyntheticEvent) => {
+  const handleSubmit = async (event: BaseSyntheticEvent): Promise<void> => {
     const { Email, Cpf, Phone } = useValidFields;
     event.preventDefault();
-    
-    console.log(Email)
-    console.log(Cpf)
-    console.log(Phone)
     
     if (Email && Cpf && Phone) {
       const data = formData(event.target);
@@ -133,7 +92,13 @@ const User = () => {
                     placeholder="Digite seu e-mail"
                     required
                     maxLength={150}
-                    onBlur={verifyInputedData}
+                    onBlur={(event) => {
+                      verifyInputedData(event, [
+                        { useValidFields, setValidFields },
+                        { useLastValidatedFields, setLastValidatedFields },
+                      ]);
+                    }}
+                    className={getVerifiedInputClass(useValidFields.Email)}
                   />
                 </div>
 
@@ -146,7 +111,13 @@ const User = () => {
                     placeholder="Digite seu CPF"
                     required
                     maxLength={15}
-                    onBlur={verifyInputedData}
+                    onBlur={(event) => {
+                      verifyInputedData(event, [
+                        { useValidFields, setValidFields },
+                        { useLastValidatedFields, setLastValidatedFields },
+                      ]);
+                    }}
+                    className={getVerifiedInputClass(useValidFields.Cpf)}
                   />
                 </div>
 
@@ -171,7 +142,13 @@ const User = () => {
                     placeholder="(xx) xxxx-xxxx"
                     required
                     maxLength={15}
-                    onBlur={verifyInputedData}
+                    onBlur={(event) => {
+                      verifyInputedData(event, [
+                        { useValidFields, setValidFields },
+                        { useLastValidatedFields, setLastValidatedFields },
+                      ]);
+                    }}
+                    className={getVerifiedInputClass(useValidFields.Phone)}
                   />
                 </div>
 

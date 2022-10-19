@@ -6,8 +6,7 @@ const handler = async (
     response: NextApiResponse<any>
 ) => {
         const { Email, Cpf, Phone } = request.query
-        let url = null;
-        console.log('front api get request')
+        let url = '';
 
         if (Email) {
             url = `${process.env.API_URL_BASE}/user/get-by-email/${Email}`;
