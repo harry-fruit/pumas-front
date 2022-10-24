@@ -126,15 +126,10 @@
     background-color: #eeeeee75;
 }
 
-.inputBox input:focus-visible {
-    outline: none;
-} 
-.inputBox input:active {
-    outline: none;
-} 
-.inputBox input:focus {
-    outline: none;
-} 
+
+.floating {
+    position: absolute;
+}
 
 .inputBox label {
     font-size: 1rem;

@@ -5,4 +5,5 @@ export const encrypt = (toEncrypt: string): string => {
     return bcrypt.hashSync(toEncrypt, saltRounds);
 };
 
+
 // export const decrypt

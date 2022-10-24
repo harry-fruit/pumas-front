@@ -1,22 +1,41 @@
 import { StatusCodes } from "http-status-codes";
 import _ from "lodash";
+import { AppContext } from "next/app";
 import Head from "next/head";
-import Router from "next/router";
+import Router, { useRouter } from "next/router";
 import { BaseSyntheticEvent, useState } from "react";
 import style from "../../styles/register/User.module.css";
+import { UserTypes } from "../../util/Defines";
 import { formData, getVerifiedInputClass, verifyInputedData } from "../../util/Form";
 
-const User = () => {
+export async function getServerSideProps(context) {
+  const { userType } = context.params;
+
+  return {
+    props: {
+      userType
+    }
+  };
+}
+
+const User = ({ userType }) => {
+
+  console.log(userType)
+
   const [useValidFields, setValidFields] = useState({
     Email: null,
     Cpf: null,
     Phone: null,
+    Cnpj:null,
+    Cnh: null
   });
 
   const [useLastValidatedFields, setLastValidatedFields] = useState({
     Email: "",
     Cpf: "",
     Phone: "",
+    Cnpj: "",
+    Cnh:""
   });
 
   const handleSubmit = async (event: BaseSyntheticEvent): Promise<void> => {
@@ -103,12 +122,12 @@ const User = () => {
                 </div>
 
                 <div className={style.inputBox}>
-                  <label htmlFor="CPF">CPF</label>
+                  <label htmlFor={userType === UserTypes.STORE ? 'CNPJ' : 'CPF'}>{userType === UserTypes.STORE ? 'CNPJ' : 'CPF'}</label>
                   <input
-                    id="CPF"
+                    id={userType === UserTypes.STORE ? 'CNPJ' : 'CPF'}
                     type="text"
-                    name="Cpf"
-                    placeholder="Digite seu CPF"
+                    name={userType === UserTypes.STORE ? 'Cnpj' : 'Cpf'}
+                    placeholder={userType === UserTypes.STORE ? "Digite seu CNPJ" : "Digite seu CPF"}
                     required
                     maxLength={15}
                     onBlur={(event) => {
@@ -175,6 +194,87 @@ const User = () => {
                     maxLength={255}
                   />
                 </div>
+              
+                {
+                  userType === UserTypes.STORE && 
+                  <>
+                    <div className={style.inputBox}>
+                      <label htmlFor="SocialReason">Razão Social</label>
+                      <input
+                        id="SocialReason"
+                        type="text"
+                        name="SocialReason"
+                        placeholder="Digite a razão social"
+                        required
+                        maxLength={255}
+                        onBlur={(event) => {
+                          verifyInputedData(event, [
+                            { useValidFields, setValidFields },
+                            { useLastValidatedFields, setLastValidatedFields },
+                          ]);
+                        }}
+                      />
+                    </div>
+                    <div className={style.inputBox}>
+                      <label htmlFor="ComercialName">Nome Fantasia</label>
+                      <input
+                        id="ComercialName"
+                        type="text"
+                        name="ComercialName"
+                        placeholder="Digite o nome fantasia"
+                        required
+                        maxLength={255}
+                        onBlur={(event) => {
+                          verifyInputedData(event, [
+                            { useValidFields, setValidFields },
+                            { useLastValidatedFields, setLastValidatedFields },
+                          ]);
+                        }}
+                      />
+                    </div>
+                  </>
+                }
+
+                {
+                  userType === UserTypes.MOTOBOY && 
+                  <>
+                    <div className={style.inputBox}>
+                      <label htmlFor="CNH">CNH</label>
+                      <input
+                        id="CNH"
+                        type="text"
+                        name="Cnh"
+                        placeholder="Digite a CNH"
+                        required
+                        maxLength={255}
+                        onBlur={(event) => {
+                          verifyInputedData(event, [
+                            { useValidFields, setValidFields },
+                            { useLastValidatedFields, setLastValidatedFields },
+                          ]);
+                        }}
+                        
+                      />
+                    </div>
+                    <div className={style.inputBox}>
+                      <label htmlFor="Plate">Placa da Moto</label>
+                      <input
+                        id="Plate"
+                        type="text"
+                        name="Plate"
+                        placeholder="Digite a placa da moto"
+                        required
+                        maxLength={255}
+                        onBlur={(event) => {
+                          verifyInputedData(event, [
+                            { useValidFields, setValidFields },
+                            { useLastValidatedFields, setLastValidatedFields },
+                          ]);
+                        }}
+                      />
+                    </div>
+                  </>
+                }
               </div>
               <button
                 className={`btn btnCustom ${style.continueButton}`}

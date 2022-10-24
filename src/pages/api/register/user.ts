@@ -23,14 +23,19 @@ const handler = async (
   const { Password, ConfirmPassword } = body as formData;
 
   const createUserUrl = `${process.env.API_URL_BASE}/user/create-user`;
+  
+  if (request.method != 'POST'){
+    response.status(405).send({ message: 'Only POST requests allowed' })
+    return
+  }
+  
   if (Password != ConfirmPassword) {
     response.statusCode = StatusCodes.BAD_REQUEST;
     response.statusMessage = ReasonPhrases.BAD_REQUEST;
 
-    return response.send({ error: true, message: "Password doesn't match" });
+    return response.send({ error: true, message: "Password doesn't match", type: 'WRONG_PASSWORD' });
   } else {
     const { ConfirmPassword, ...payload } = body as formData;
-    payload.Password = encrypt(payload.Password);
     const result: AxiosResponse = await axios.post(createUserUrl, payload);
 
     if (result.data.error) {
