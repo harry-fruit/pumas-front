@@ -1,33 +1,35 @@
 import { StatusCodes } from "http-status-codes";
 import _ from "lodash";
-import { AppContext } from "next/app";
 import Head from "next/head";
-import Router, { useRouter } from "next/router";
+import Router from "next/router";
 import { BaseSyntheticEvent, useState } from "react";
 import style from "../../styles/register/User.module.css";
 import { UserTypes } from "../../util/Defines";
-import { formData, getVerifiedInputClass, verifyInputedData } from "../../util/Form";
+import {
+  formData,
+  getVerifiedInputClass,
+  verifyInputedData,
+} from "../../util/Form";
 
 export async function getServerSideProps(context) {
   const { userType } = context.params;
 
   return {
     props: {
-      userType
-    }
+      userType,
+    },
   };
 }
 
 const User = ({ userType }) => {
-
-  console.log(userType)
-
   const [useValidFields, setValidFields] = useState({
     Email: null,
     Cpf: null,
     Phone: null,
-    Cnpj:null,
-    Cnh: null
+    Cnpj: null,
+    SocialReason: null,
+    ComercialName: null,
+    Cnh: null,
   });
 
   const [useLastValidatedFields, setLastValidatedFields] = useState({
@@ -35,25 +37,31 @@ const User = ({ userType }) => {
     Cpf: "",
     Phone: "",
     Cnpj: "",
-    Cnh:""
+    SocialReason: "",
+    ComercialName: "",
+    Cnh: "",
   });
 
   const handleSubmit = async (event: BaseSyntheticEvent): Promise<void> => {
-    const { Email, Cpf, Phone } = useValidFields;
+    const { Email, Cpf, Phone, Cnpj } = useValidFields;
     event.preventDefault();
-    
-    if (Email && Cpf && Phone) {
+
+    if (
+      ((userType != UserTypes.STORE && Cpf) ||
+        (userType === UserTypes.STORE && Cnpj)) &&
+      Email &&
+      Phone
+    ) {
       const data = formData(event.target);
-      
-      const response = (await fetch("/api/register/user", {
+
+      const response = await fetch("/api/register/user", {
         body: JSON.stringify(data),
         method: "post",
-      }));
+      });
 
       if (response.status === StatusCodes.CREATED) {
-        Router.push('/auth/Login')
-      };
-
+        Router.push("/auth/Login");
+      }
     }
   };
 
@@ -78,29 +86,46 @@ const User = ({ userType }) => {
                 <h1>Cadastre-se</h1>
               </div>
               <div className={style.inputGroup}>
-                <div className={style.inputBox}>
-                  <label htmlFor="FirstName">Primeiro Nome</label>
-                  <input
-                    id="FirstName"
-                    type="text"
-                    name="FirstName"
-                    placeholder="Digite seu primeiro nome"
-                    required
-                    maxLength={50}
-                  />
-                </div>
+                {(userType === UserTypes.CLIENT ||
+                  userType === UserTypes.MOTOBOY) && (
+                  <>
+                    <div className={style.inputBox}>
+                      <label htmlFor="FirstName">Primeiro Nome</label>
+                      <input
+                        id="FirstName"
+                        type="text"
+                        name="FirstName"
+                        placeholder="Digite seu primeiro nome"
+                        required
+                        maxLength={50}
+                      />
+                    </div>
 
-                <div className={style.inputBox}>
-                  <label htmlFor="LastName">Sobrenome</label>
-                  <input
-                    id="LastName"
-                    type="text"
-                    name="LastName"
-                    placeholder="Digite seu sobrenome"
-                    required
-                    maxLength={50}
-                  />
-                </div>
+                    <div className={style.inputBox}>
+                      <label htmlFor="LastName">Sobrenome</label>
+                      <input
+                        id="LastName"
+                        type="text"
+                        name="LastName"
+                        placeholder="Digite seu sobrenome"
+                        required
+                        maxLength={50}
+                      />
+                    </div>
+
+                    <div className={style.inputBox}>
+                      <label htmlFor="Gender">Gênero</label>
+                      <select name="Gender" id="Gender">
+                        <option value="Masculino">Masculino</option>
+                        <option value="Feminino">Feminino</option>
+                        <option value="Transgenero">Transgenero</option>
+                        <option value="Genero Neutro">Genero Neutro</option>
+                        <option value="Nao Binario">Nao Binario</option>
+                        <option value="Outros">Outros</option>
+                      </select>
+                    </div>
+                  </>
+                )}
 
                 <div className={style.inputBox}>
                   <label htmlFor="Email">E-mail</label>
@@ -122,12 +147,20 @@ const User = ({ userType }) => {
                 </div>
 
                 <div className={style.inputBox}>
-                  <label htmlFor={userType === UserTypes.STORE ? 'CNPJ' : 'CPF'}>{userType === UserTypes.STORE ? 'CNPJ' : 'CPF'}</label>
+                  <label
+                    htmlFor={userType === UserTypes.STORE ? "CNPJ" : "CPF"}
+                  >
+                    {userType === UserTypes.STORE ? "CNPJ" : "CPF"}
+                  </label>
                   <input
-                    id={userType === UserTypes.STORE ? 'CNPJ' : 'CPF'}
+                    id={userType === UserTypes.STORE ? "CNPJ" : "CPF"}
                     type="text"
-                    name={userType === UserTypes.STORE ? 'Cnpj' : 'Cpf'}
-                    placeholder={userType === UserTypes.STORE ? "Digite seu CNPJ" : "Digite seu CPF"}
+                    name={userType === UserTypes.STORE ? "Cnpj" : "Cpf"}
+                    placeholder={
+                      userType === UserTypes.STORE
+                        ? "Digite seu CNPJ"
+                        : "Digite seu CPF"
+                    }
                     required
                     maxLength={15}
                     onBlur={(event) => {
@@ -136,20 +169,12 @@ const User = ({ userType }) => {
                         { useLastValidatedFields, setLastValidatedFields },
                       ]);
                     }}
-                    className={getVerifiedInputClass(useValidFields.Cpf)}
+                    className={getVerifiedInputClass(
+                      userType === UserTypes.STORE
+                        ? useValidFields.Cnpj
+                        : useValidFields.Cpf
+                    )}
                   />
-                </div>
-
-                <div className={style.inputBox}>
-                  <label htmlFor="Gender">Gênero</label>
-                  <select name="Gender" id="Gender">
-                    <option value="Masculino">Masculino</option>
-                    <option value="Feminino">Feminino</option>
-                    <option value="Transgenero">Transgenero</option>
-                    <option value="Genero Neutro">Genero Neutro</option>
-                    <option value="Nao Binario">Nao Binario</option>
-                    <option value="Outros">Outros</option>
-                  </select>
                 </div>
 
                 <div className={style.inputBox}>
@@ -194,9 +219,8 @@ const User = ({ userType }) => {
                     maxLength={255}
                   />
                 </div>
-              
-                {
-                  userType === UserTypes.STORE && 
+
+                {userType === UserTypes.STORE && (
                   <>
                     <div className={style.inputBox}>
                       <label htmlFor="SocialReason">Razão Social</label>
@@ -213,6 +237,9 @@ const User = ({ userType }) => {
                             { useLastValidatedFields, setLastValidatedFields },
                           ]);
                         }}
+                        className={getVerifiedInputClass(
+                          useValidFields.SocialReason
+                        )}
                       />
                     </div>
                     <div className={style.inputBox}>
@@ -230,13 +257,15 @@ const User = ({ userType }) => {
                             { useLastValidatedFields, setLastValidatedFields },
                           ]);
                         }}
+                        className={getVerifiedInputClass(
+                          useValidFields.ComercialName
+                        )}
                       />
                     </div>
                   </>
-                }
+                )}
 
-                {
-                  userType === UserTypes.MOTOBOY && 
+                {userType === UserTypes.MOTOBOY && (
                   <>
                     <div className={style.inputBox}>
                       <label htmlFor="CNH">CNH</label>
@@ -253,7 +282,6 @@ const User = ({ userType }) => {
                             { useLastValidatedFields, setLastValidatedFields },
                           ]);
                         }}
-                        
                       />
                     </div>
                     <div className={style.inputBox}>
@@ -274,7 +302,7 @@ const User = ({ userType }) => {
                       />
                     </div>
                   </>
-                }
+                )}
               </div>
               <button
                 className={`btn btnCustom ${style.continueButton}`}

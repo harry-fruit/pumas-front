@@ -37,38 +37,36 @@ export const verifyInputedData = async (
   event.preventDefault();
 
   const element = event.target;
-  console.log(element.name)
-  console.log(element.value)
-
+  console.log(useValidFields)
   if (element.value != useLastValidatedFields[element.name]) {
-    // const result = await (
-    //   await fetch(`/api/validate/user?${element.name}=${element.value}`)
-    // ).json();
+    const result = await (
+      await fetch(`/api/validate/user?${element.name}=${element.value}`)
+    ).json();
 
-    // setValidFields({
-    //   ...useValidFields,
-    //   [element.name]: result.isValid,
-    // });
+    setValidFields({
+      ...useValidFields,
+      [element.name]: result.isValid,
+    });
 
-    // setLastValidatedFields({
-    //   ...useLastValidatedFields,
-    //   [element.name]: element.value,
-    // });
+    setLastValidatedFields({
+      ...useLastValidatedFields,
+      [element.name]: element.value,
+    });
 
-    // if (!result.isValid) {
-    //   setValidityInput(element, result.isValid, `${element.name} já cadastrado.`)
-    // } else {
-    //   setValidityInput(element, result.isValid);
-    // }
+    if (!result.isValid) {
+      setValidityInput(element, result.isValid, `${element.name} já cadastrado.`)
+    } else {
+      setValidityInput(element, result.isValid);
+    }
   } else {
-    // if (
-    //   _.isBoolean(useValidFields[element.name]) &&
-    //   !useValidFields[element.name]
-    // ) {
-    //   setValidityInput(element, useValidFields[element.name], `${element.name} já cadastrado.`)
-    // } else {
-    //   setValidityInput(element, useValidFields[element.name])
-    // }
+    if (
+      _.isBoolean(useValidFields[element.name]) &&
+      !useValidFields[element.name]
+    ) {
+      setValidityInput(element, useValidFields[element.name], `${element.name} já cadastrado.`)
+    } else {
+      setValidityInput(element, useValidFields[element.name])
+    }
   }
 };
 

@@ -1,6 +1,5 @@
 import axios, { AxiosResponse } from "axios";
 import { NextApiRequest, NextApiResponse } from "next";
-import { encrypt } from "../../../util/Bcrypt";
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
 import { NextResponse } from "next/server";
 
