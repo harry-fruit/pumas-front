@@ -1,3 +1,4 @@
+import { Alert } from "@mui/material";
 import { StatusCodes } from "http-status-codes";
 import _ from "lodash";
 import Head from "next/head";
@@ -42,6 +43,8 @@ const User = ({ userType }) => {
     Cnh: "",
   });
 
+  const [usePasswordMatch, setPasswordMatch] = useState(true);
+
   const handleSubmit = async (event: BaseSyntheticEvent): Promise<void> => {
     const { Email, Cpf, Phone, Cnpj } = useValidFields;
     event.preventDefault();
@@ -52,7 +55,10 @@ const User = ({ userType }) => {
       Email &&
       Phone
     ) {
-      const data = formData(event.target);
+      const data = {
+        UserType: userType.toUpperCase(),
+        ...formData(event.target)
+      };
 
       const response = await fetch("/api/register/user", {
         body: JSON.stringify(data),
@@ -60,7 +66,9 @@ const User = ({ userType }) => {
       });
 
       if (response.status === StatusCodes.CREATED) {
-        Router.push("/auth/Login");
+        Router.push("/auth/login");
+      } else if (response.status === StatusCodes.BAD_REQUEST) {
+        setPasswordMatch(false)
       }
     }
   };
@@ -71,6 +79,10 @@ const User = ({ userType }) => {
         <title>Cadastro de Usuário</title>
       </Head>
       <main className={style.main}>
+        {
+          !usePasswordMatch &&
+          <Alert severity="error">As senhas não batem!</Alert>
+        }
         <div className={style.container}>
           <div className={style.formImage}>
             <div className={style.imagemPrincipal} />
@@ -86,46 +98,46 @@ const User = ({ userType }) => {
                 <h1>Cadastre-se</h1>
               </div>
               <div className={style.inputGroup}>
-                {(userType === UserTypes.CLIENT ||
+                {(userType === UserTypes.CONSUMER ||
                   userType === UserTypes.MOTOBOY) && (
-                  <>
-                    <div className={style.inputBox}>
-                      <label htmlFor="FirstName">Primeiro Nome</label>
-                      <input
-                        id="FirstName"
-                        type="text"
-                        name="FirstName"
-                        placeholder="Digite seu primeiro nome"
-                        required
-                        maxLength={50}
-                      />
-                    </div>
+                    <>
+                      <div className={style.inputBox}>
+                        <label htmlFor="FirstName">Primeiro Nome</label>
+                        <input
+                          id="FirstName"
+                          type="text"
+                          name="FirstName"
+                          placeholder="Digite seu primeiro nome"
+                          required
+                          maxLength={50}
+                        />
+                      </div>
 
-                    <div className={style.inputBox}>
-                      <label htmlFor="LastName">Sobrenome</label>
-                      <input
-                        id="LastName"
-                        type="text"
-                        name="LastName"
-                        placeholder="Digite seu sobrenome"
-                        required
-                        maxLength={50}
-                      />
-                    </div>
+                      <div className={style.inputBox}>
+                        <label htmlFor="LastName">Sobrenome</label>
+                        <input
+                          id="LastName"
+                          type="text"
+                          name="LastName"
+                          placeholder="Digite seu sobrenome"
+                          required
+                          maxLength={50}
+                        />
+                      </div>
 
-                    <div className={style.inputBox}>
-                      <label htmlFor="Gender">Gênero</label>
-                      <select name="Gender" id="Gender">
-                        <option value="Masculino">Masculino</option>
-                        <option value="Feminino">Feminino</option>
-                        <option value="Transgenero">Transgenero</option>
-                        <option value="Genero Neutro">Genero Neutro</option>
-                        <option value="Nao Binario">Nao Binario</option>
-                        <option value="Outros">Outros</option>
-                      </select>
-                    </div>
-                  </>
-                )}
+                      <div className={style.inputBox}>
+                        <label htmlFor="Gender">Gênero</label>
+                        <select name="Gender" id="Gender">
+                          <option value="Masculino">Masculino</option>
+                          <option value="Feminino">Feminino</option>
+                          <option value="Transgenero">Transgenero</option>
+                          <option value="Genero Neutro">Genero Neutro</option>
+                          <option value="Nao Binario">Nao Binario</option>
+                          <option value="Outros">Outros</option>
+                        </select>
+                      </div>
+                    </>
+                  )}
 
                 <div className={style.inputBox}>
                   <label htmlFor="Email">E-mail</label>

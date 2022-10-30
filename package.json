@@ -9,10 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@emotion/react": "^11.10.4",
-    "@emotion/styled": "^11.10.4",
-    "@mui/material": "^5.10.10",
-    "@types/lodash": "^4.14.186",
     "axios": "^1.1.2",
     "bcrypt": "^5.1.0",
     "bootstrap": "^5.2.2",
@@ -23,9 +19,16 @@
     "next": "12.3.1",
     "react": "18.2.0",
     "react-bootstrap": "^2.5.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "react-toastr": "^3.0.0",
+    "styled-components": "^5.3.6"
   },
   "devDependencies": {
+    "@emotion/react": "^11.10.4",
+    "@emotion/styled": "^11.10.4",
+    "@mui/material": "^5.10.10",
+    "@types/lodash": "^4.14.186",
+    "@types/styled-components": "^4.0.3",
     "@types/bcrypt": "^5.0.0",
     "@types/node": "18.7.18",
     "@types/react": "18.0.20",

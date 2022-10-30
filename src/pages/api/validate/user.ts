@@ -30,8 +30,6 @@ const handler = async (
 
   const isValid = !(await axios.get(url)).data.data;
 
-  console.log(isValid)
-
   return response.status(200).send(JSON.stringify({ isValid }));
 };
 

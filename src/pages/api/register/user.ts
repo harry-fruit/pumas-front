@@ -1,17 +1,20 @@
 import axios, { AxiosResponse } from "axios";
 import { NextApiRequest, NextApiResponse } from "next";
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
-import { NextResponse } from "next/server";
 
 type formData = {
-  FirstName: string;
-  LastName: string;
+  FirstName?: string;
+  LastName?: string;
   Email: string;
-  Gender: string;
+  Gender?: string;
   Phone: string;
-  Cpf: string;
+  Cpf?: string;
+  Cnpj?: string;
   Password: string;
   ConfirmPassword: string;
+  Cnh?: string;
+  Plate?: string;
+  UserType: string;
 };
 
 const handler = async (
@@ -36,7 +39,6 @@ const handler = async (
   } else {
     const { ConfirmPassword, ...payload } = body as formData;
     const result: AxiosResponse = await axios.post(createUserUrl, payload);
-
     if (result.data.error) {
       throw new Error('Erro ao criar usuario')
     } else {

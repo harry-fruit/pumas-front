@@ -87,11 +87,11 @@
     width: 100%;
 }
 
-.main .listagemProdutos .produtosPorCategoria .produtos .containerProdutos  .produto .imgProduto {
+/* .main .listagemProdutos .produtosPorCategoria .produtos .containerProdutos  .produto .imgProduto {
     background-color: black;
     width: 10vh;
     height: 10vh;
-} 
+}  */
 
 
 @media (min-width: 1200px) {
