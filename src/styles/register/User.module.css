@@ -55,7 +55,7 @@
 
 .loginButton button {
     border: none;
-    background-color: #e51b23;
+    background-color: #f1393f;
     padding: 1vh 10vw;
     border-radius: 5px;
     cursor: pointer;
@@ -66,7 +66,7 @@
 
 .loginButton button:hover {
     background-color: white;
-    border: 1px solid #e51b23;
+    border: 1px solid #f1393f;
 }
 
 .loginButton button a {
@@ -90,7 +90,7 @@
     display: block;
     width: 5rem;
     height: 0.3rem;
-    background-color: #e51b23;
+    background-color: #f1393f;
     margin: 0 auto;
     position: absolute;
     border-radius: 10px;
@@ -150,7 +150,7 @@
     
     width: 50%;
     border: none;
-    background-color: #e51b23;
+    background-color: #f1393f;
     color: white;
     padding: 0.62rem;
     border-radius: 5px;

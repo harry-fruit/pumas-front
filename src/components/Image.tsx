@@ -5,8 +5,8 @@ interface Props {
 }
 
 export const ItemImage = styled.img<Props>`
-    width: 10vh;
-    height: 10vh;
+    width: 15vh;
+    height: 15vh;
     background-image: url("${(props) => props.url}");
     background-size: contain;
     background-repeat: no-repeat;

@@ -10,7 +10,6 @@ const handler = async (
 
     const auth = (await axios.post(url, payload) as any).data;
 
-
   return response.status(200).send(auth);
 };
 

@@ -11,13 +11,15 @@ import { useWindowSize } from '../hooks/useWindowSize';
 
 
 const CatalogByCategory = ({ data }) => {
-    const { dataByCategory: itemsData} = data;
+    const { dataByCategory: itemsData } = data;
     const [useCategoryFilter, setCategoryFilter] = useState(null as any);
     const [useItemsToShow, setItemsToShow] = useState(itemsData);
     const [useShowItemPopup, setShowItemPopup] = useState(false);
     const { width, height, isMobile } = useWindowSize()
-    
-    const handleItemPopup = (showPopup) =>{
+    const [usePopupItemData, setPopupItemData] = useState({} as any)
+
+    const handleItemPopup = (showPopup, categoryData) => {
+        setPopupItemData(categoryData)
         setShowItemPopup(showPopup)
     }
 
@@ -28,24 +30,23 @@ const CatalogByCategory = ({ data }) => {
             </Head>
             <Header />
             <main id={'mainContainer'} className={style.main}>
-                <CategoriesCatalog 
-                    mainCategories={data.mainCategories} 
-                    hooks={{ 
-                        useCategoryFilter, 
-                        setCategoryFilter, 
-                        setItemsToShow, 
-                        itemsData 
+                <CategoriesCatalog
+                    mainCategories={data.mainCategories}
+                    hooks={{
+                        useCategoryFilter,
+                        setCategoryFilter,
+                        setItemsToShow,
+                        itemsData
                     }}
-                    />
-                {useShowItemPopup 
-                && (<ItemPopup 
-                        itemData={{}} 
-                        handlers={{ handleItemPopup }} 
+                />
+                { useShowItemPopup
+                    && (<ItemPopup
+                        itemData={usePopupItemData}
+                        handlers={{ handleItemPopup }}
                         size={{ width, height, isMobile }}
                     />)
                 }
                 <section className={style.listagemProdutos}>
-
                     {
                         Object.keys(useItemsToShow).map(element => {
                             return (
@@ -55,10 +56,10 @@ const CatalogByCategory = ({ data }) => {
                                         <div className={style.containerProdutos}>
                                             {
                                                 data.dataByCategory[element].map(categoryData => {
-                                                    return (<div className={style.produto} key={categoryData.Name} onClick={(event) => { handleItemPopup(true) }}>
+                                                    return (<div className={style.produto} key={categoryData.Name} onClick={(event) => { handleItemPopup(true, categoryData) }}>
                                                         <div className={style.descricaoProduto}>
                                                             <ItemImage url={categoryData.Image || ''} />
-                                                            <p>{categoryData.Name}</p>
+                                                            <p><b>{categoryData.Name}</b></p>
                                                             <p>R${categoryData.Price}</p>
                                                         </div>
                                                     </div>)

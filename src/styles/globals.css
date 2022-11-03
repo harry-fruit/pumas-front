@@ -35,7 +35,7 @@ a {
 }
 
 .btnCustom {
-  background-image: linear-gradient(to right, #e51b23 0%, #e86d71 51%, #e51b23 100%);
+  background-image: linear-gradient(to right, #f1393f 0%, #e86d71 51%, #f1393f 100%);
 }
 
 .mainContainer {
@@ -61,6 +61,10 @@ a {
 
 .validInput {
   border: 2px solid green!important;
+}
+
+.lighterGray {
+  background-color: #faf9f7;
 }
 
 

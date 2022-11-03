@@ -1,0 +1,84 @@
+.itemDetails {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    height: 100%;
+    gap: 2vh;
+    padding: 4vh 0;
+}
+
+.itemDetails .firstRow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    gap: 2vh;
+    padding: 0 4vw;
+    height:65%;
+}
+
+
+.itemDetails .name {
+    background-color: #f1393f;
+    padding: 2.25vh 6vw;
+    color: white;
+    text-align: center;
+    width: 100%;
+    border-radius: 4px;
+}
+
+.itemDetails .description {
+    /* background-color: pink; */
+    font-size: 1.1rem;
+    text-align: center;
+    background-color: white;
+    padding: 2vh 6vh;
+}
+
+.itemDetails .secondRow {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2vh;
+}
+
+.itemDetails .secondRow .addItem {
+    background-color: #f1393f;
+    border: none;
+    color: white;
+    width: 80%;
+    height: 6vh;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+.itemDetails .secondRow .counter {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 80%;
+    height: 6vh;
+}
+
+.itemDetails .secondRow .counter .counterDisplay{
+    height: 100%;
+    width: 33.333%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    background-color: white;
+}
+
+.itemDetails .secondRow .counter .counterOperator {
+    height: 100%;
+    width: 33.333%;
+    background-color: #f1393f;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    border-radius: 4px;
+}

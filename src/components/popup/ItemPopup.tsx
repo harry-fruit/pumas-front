@@ -1,8 +1,7 @@
-import { Popup } from "devextreme-react"
-import { Position } from "devextreme-react/popup"
+import { Popup, ScrollView } from "devextreme-react"
 import { ItemPopupContainer } from "./ItemPopupContainer";
 
-export const ItemPopup = ({ itemData, handlers: { handleItemPopup }, size:{width, height, isMobile}}) => {
+export const ItemPopup = ({ itemData: { Name, Category, Description, Image }, handlers: { handleItemPopup }, size: { width, height, isMobile } }) => {
     return (
         <Popup
             visible={true}
@@ -10,17 +9,31 @@ export const ItemPopup = ({ itemData, handlers: { handleItemPopup }, size:{width
             hideOnOutsideClick={true}
             showCloseButton={true}
             showTitle={true}
-            title="Information"
+            title={'Detalhes do Produto'}
             container="#mainContainer"
             width={isMobile ? (width) : ((width as number) * 0.75)}
-            height={(isMobile ? (height as number * 0.7) : ((height as number) * 0.4))}
+            height={(isMobile ? (height as number * 0.78) : ((height as number) * 0.7))}
             onHidden={() => { handleItemPopup(false) }}
-            >
-            <Position
-                at="center"
-                my="center"
-            />
-           <ItemPopupContainer size={{ width, height, isMobile }}/>
+        >
+            {
+                isMobile ?
+                (<ScrollView id="scrollview"
+                    scrollByContent={true}
+                    bounceEnabled={false}
+                    // onReachBottom={this.updateBottomContent}
+                    // onPullDown={this.updateTopContent}
+                    showScrollbar={"onScroll"}
+                    scrollByThumb={true}>
+                    <ItemPopupContainer
+                        itemData={{ Name, Category, Description, Image }}
+                        size={{ width, height, isMobile }} />
+                </ScrollView>)
+                :
+                <ItemPopupContainer
+                itemData={{ Name, Category, Description, Image }}
+                size={{ width, height, isMobile }} />
+            }
+            
         </Popup>
     )
 };

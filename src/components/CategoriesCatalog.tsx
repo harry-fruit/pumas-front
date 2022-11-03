@@ -24,33 +24,33 @@ export const CategoriesCatalog = ({
 
     return (
         <div className={`container text-center ${style.container}`}>
-            <div className={`row ${style.categoriaProdutos} align-items-center`}>
+            <div className={`${style.categoriaProdutos} align-items-center`}>
 
-                <div className={`col ${style.categoriaProduto}`} onClick={(event) => { changeCategoryFilter(mainCategories[0]) }}>
-                    <div className={`${style.categoria} row align-items-center`}>
-                        <i className="fa-solid fa-wine-glass col-md-2"></i>
-                        <a className={`col-md-10  ${style.nomeProduto}`} >{_.capitalize(mainCategories[0] || '')}</a>
+                <div className={`${style.categoriaProduto}`} onClick={() => { changeCategoryFilter(mainCategories[0]) }}>
+                    <div className={`${style.categoria}`}>
+                        <i className="fa-solid fa-wine-glass"></i>
+                        <a className={`${style.nomeProduto}`} >{_.capitalize(mainCategories[0] || '')}</a>
                     </div>
                 </div>
 
-                <div className={`col ${style.categoriaProduto}`} onClick={(event) => { changeCategoryFilter(mainCategories[1]) }}>
-                    <div className={`${style.categoria} row align-items-center`}>
-                        <i className="fa-solid fa-wine-glass col-md-2"></i>
-                        <a className={`col-md-10  ${style.nomeProduto}`} >{_.capitalize(mainCategories[1] || '')}</a>
+                <div className={`${style.categoriaProduto}`} onClick={() => { changeCategoryFilter(mainCategories[1]) }}>
+                    <div className={`${style.categoria}`}>
+                        <i className="fa-solid fa-wine-glass"></i>
+                        <a className={`${style.nomeProduto}`} >{_.capitalize(mainCategories[1] || '')}</a>
                     </div>
                 </div>
 
-                <div className={`col ${style.categoriaProduto}`} onClick={(event) => { changeCategoryFilter(mainCategories[2]) }}>
-                    <div className={`${style.categoria} row align-items-center`}>
-                        <i className="fa-solid fa-wine-glass col-md-2"></i>
-                        <a className={`col-md-10  ${style.nomeProduto}`} >{_.capitalize(mainCategories[2] || '')}</a>
+                <div className={`${style.categoriaProduto}`} onClick={() => { changeCategoryFilter(mainCategories[2]) }}>
+                    <div className={`${style.categoria}`}>
+                        <i className="fa-solid fa-wine-glass"></i>
+                        <a className={`${style.nomeProduto}`} >{_.capitalize(mainCategories[2] || '')}</a>
                     </div>
                 </div>
 
-                <div className={`col ${style.categoriaProduto}`} onClick={(event) => { changeCategoryFilter(mainCategories[3]) }}>
-                    <div className={`${style.categoria} row align-items-center`}>
-                        <i className="fa-solid fa-wine-glass col-md-2"></i>
-                        <a className={`col-md-10  ${style.nomeProduto}`} >{_.capitalize(mainCategories[3] || '')}</a>
+                <div className={`${style.categoriaProduto}`} onClick={() => { changeCategoryFilter(mainCategories[3]) }}>
+                    <div className={`${style.categoria}`}>
+                        <i className="fa-solid fa-wine-glass"></i>
+                        <a className={`${style.nomeProduto}`} >{_.capitalize(mainCategories[3] || '')}</a>
                     </div>
                 </div>
 

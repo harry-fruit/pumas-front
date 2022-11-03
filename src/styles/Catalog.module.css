@@ -6,12 +6,31 @@
 }
 
 .main .categoriaProdutos {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1vw;
     padding: 0 2vw;
     height: 10vh;
-    background-color: #e51b23;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
+    background-color: #f1393f;
     margin-bottom: 4vh;
+    justify-content: space-around;
+}
+
+.main .categoriaProdutos .categoriaProduto {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
+}
+.main .categoriaProdutos .categoriaProduto .categoria {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 1vw;
+    padding: 2vh 4vw;
 }
 
 .main .categoriaProdutos .categoria i,
@@ -36,7 +55,7 @@
 }
 
 .main .listagemProdutos .produtosPorCategoria .produtos {
-    background-color: #f7f5f5;
+    background-color: #faf9f7;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -62,24 +81,37 @@
   }
   
   .main .listagemProdutos .produtosPorCategoria .produtos .containerProdutos::-webkit-scrollbar-track {
-    background-color: #e4e4e4;
+    background-color: #efefef;
     border-radius: 100px;
   }
   
   .main .listagemProdutos .produtosPorCategoria .produtos .containerProdutos::-webkit-scrollbar-thumb {
-    background-color: #ccc;
+    background-color: #f1393f;
     border-radius: 100px;
   }
 
 .main .listagemProdutos .produtosPorCategoria .produtos .containerProdutos  .produto {
     padding: 2vh;
-    min-width: 30%;
+    min-width: 40%;
     display: flex;
     flex-direction: column;
     justify-content:center;
-    gap: 1vh;
     align-items: center;
     cursor: pointer;
+    border-radius: 5px;
+}
+
+.main .listagemProdutos .produtosPorCategoria .produtos .containerProdutos  .produto .descricaoProduto {
+    min-height: 35vh ;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0 2vw;
+}
+
+.main .listagemProdutos .produtosPorCategoria .produtos .containerProdutos  .produto:hover{
+    background-color: #f881853f;
 }
 
 .main .listagemProdutos .produtosPorCategoria .produtos .containerProdutos  .produto .descricaoProduto p{
@@ -115,7 +147,7 @@
         padding: 0 2vw;
         height: 10vh;
         width: 80%;
-        background-color: #e51b23;
+        background-color: #f1393f;
         border-bottom-left-radius: 10px;
         border-bottom-right-radius: 10px;
         margin-bottom: 4vh;
