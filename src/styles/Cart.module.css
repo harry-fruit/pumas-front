@@ -1,0 +1,149 @@
+@media (max-width: 600px) {
+
+    .main {
+        /* height: 85vh; */
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 2vh 0;
+
+    }
+
+    .main h1 {
+        height: 10%;
+    }
+
+    .main .itemsContainer {
+        /* min-height: 30; */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 90%;
+        width: 100%;
+        gap: 2vh;
+    }
+
+    .main .itemsContainer .itemContainer {
+        width: 100%;
+        background-color: #faf9f7;
+        border-bottom: 1px solid #ccc;
+        border-top: 1px solid #ccc;
+        padding: 3vh 4vw 0;
+    }
+    
+    .main .itemsContainer .firstRow {
+        width: 100%;
+        /* background-color: beige; */
+        display: flex;
+        flex-direction: row;
+        gap: 6vw;
+    }
+
+    .main .itemsContainer .firstRow .itemDescription {
+        /* background-color: red; */
+        width: calc(100% - 20vh - 6vw);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .main .itemsContainer .firstRow .itemDescription .itemName {
+        font-size: 1rem;
+        font-weight: 500;
+    }
+
+    .main .itemsContainer .firstRow .imgContainer {
+        width: 20vh;
+        height: 20vh;
+        background-color: black;
+    }
+
+    .main .itemsContainer .secondRow {
+        width: 100%;
+        height: 20vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .main .itemsContainer .secondRow .quantity {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 70%; 
+    }
+
+    .main .itemsContainer .secondRow .quantity .quantityWraper {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        min-width: 60%;
+        height: 60%;
+    }
+    
+    .main .itemsContainer .secondRow .quantity button {
+        background-color: #f1393f;
+        padding: 0 7.5vw;
+        color: white;
+        border: none;
+        font-size: 1.2rem;
+        height: 6vh;
+    }
+
+    .main .itemsContainer .secondRow .quantity button:nth-child(1) {
+        border-bottom-left-radius: 5px;
+        border-top-left-radius: 5px;
+    }
+    .main .itemsContainer .secondRow .quantity button:nth-child(3) {
+        border-bottom-right-radius: 5px;
+        border-top-right-radius: 5px;
+    }
+
+    .main .itemsContainer .secondRow .quantity button:is(:active) {
+        border-right: 1px solid black;
+        border-bottom: 1px solid black;
+    }
+
+    .main .itemsContainer .secondRow .quantity .quantityDisplay {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-width: 8vw;
+        background-color: white;
+        height: 6vh;
+        font-size: 1.1rem;
+        padding: 0 2vw;
+    }
+
+
+    .main .itemsContainer .secondRow .removeItem {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content:flex-end;
+        width: 100%;
+        height: 7vh;
+    }
+    
+    .main .itemsContainer .secondRow .removeItem p {
+        font-size: 1.1rem;
+        cursor: pointer;
+        /* display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center; */
+    }
+
+    .main .itemsContainer .secondRow .removeItem p:hover {
+        text-decoration: underline;
+    }
+}

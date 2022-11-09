@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import styles from './styles/ItemPopupContainer.module.css';
+import { toast } from 'react-toastify';
 
 interface Props {
     isMobile: boolean;
@@ -27,11 +28,25 @@ const ImageContainer = styled.div<Props>`
 const DetailsContainer = styled.section<Props>`
     width: ${(props) => props.isMobile ? '100' : '60'}%;
     height: ${(props) => props.isMobile ? 'initial' : '100%'};
-
 `;
 
 
-export const ItemPopupContainer = ({ itemData: { Name, Category, Description, Image }, size: { width, height, isMobile } }) => {
+export const ItemPopupContainer = ({ itemData: { Id, Name, Category, Description, Image, Price }, size: { width, height, isMobile } }) => {
+
+    const addItem = (event, { Id, Name, Description, Image, Price, Quantity }) => {
+        event.preventDefault();
+    
+        let cart: any = localStorage.getItem('cartItems') || '[]'
+        
+        if (cart) {
+            cart = JSON.parse(cart);
+            cart.push({  Id, Name, Description, Image, Price, Quantity });
+            localStorage.setItem('cartItems', JSON.stringify(cart));
+            // console.log(JSON.parse(localStorage.getItem('cartItems')))
+        };
+        toast.success('Produto adicionado ao carrinho')
+    
+    };
     const [useQuantity, setQuantity] = useState(0);
 
     return (
@@ -49,7 +64,7 @@ export const ItemPopupContainer = ({ itemData: { Name, Category, Description, Im
                             <div className={`${styles.counterDisplay}`}>{ useQuantity }</div>
                             <button className={`${styles.counterOperator}`} onClick={() => setQuantity(useQuantity + 1)}>+</button>
                         </div>
-                        <button className={`${styles.addItem}`}>Adicionar ao carrinho</button>
+                        <button className={`${styles.addItem}`} onClick={(event) => { addItem(event, { Id, Name, Description, Image, Price, Quantity: useQuantity }) }}>Adicionar ao carrinho</button>
                     </div>
                 </div>
             </DetailsContainer>

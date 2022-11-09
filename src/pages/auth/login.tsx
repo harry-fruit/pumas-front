@@ -4,6 +4,7 @@ import Head from "next/head";
 import Router from "next/router";
 import { useState } from "react";
 import style from "../../styles/auth/Login.module.css";
+import { setAuthCookie } from "../../util/Cookies";
 import { formData } from "../../util/Form";
 
 const Login = () => {
@@ -20,6 +21,7 @@ const Login = () => {
     })).json();
 
     if (!response.error) {
+      setAuthCookie('token', response.data);
       Router.push("/catalog");
     } else {
       setValidLogin(false)

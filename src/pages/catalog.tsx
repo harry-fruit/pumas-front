@@ -8,6 +8,7 @@ import { ItemImage } from '../components/Image';
 import { Footer } from '../components/Footer';
 import { ItemPopup } from '../components/popup/ItemPopup';
 import { useWindowSize } from '../hooks/useWindowSize';
+import { ToastContainer } from 'react-toastify';
 
 
 const CatalogByCategory = ({ data }) => {
@@ -46,8 +47,9 @@ const CatalogByCategory = ({ data }) => {
                         size={{ width, height, isMobile }}
                     />)
                 }
+                <ToastContainer />
                 <section className={style.listagemProdutos}>
-                    {
+                    {   
                         Object.keys(useItemsToShow).map(element => {
                             return (
                                 <section className={style.produtosPorCategoria} key={element}>
@@ -70,7 +72,6 @@ const CatalogByCategory = ({ data }) => {
                                 </section>
                             )
                         })
-
                     }
                 </section>
             </main>

@@ -1,6 +1,9 @@
+import Link from 'next/link';
+import { useWindowSize } from '../hooks/useWindowSize';
 import style from '../styles/components/Header.module.css';
 
 export const Header = () => {
+    const { isMobile } = useWindowSize();
     return (
         <header>
             <nav className="navbar navbar-expand-md navbar-light bg-light bg-primary">
@@ -21,10 +24,16 @@ export const Header = () => {
                         </ul>
                         <ul className="navbar-nav ms-auto">
                             <li className={`nav-item ${style.marginRight}`}>
-                                <a href=""><i className={`fa-solid fa-cart-shopping col-md-2 ${style.userIcons}`}></i></a>
+                                {
+                                    isMobile ? <Link className="nav-link" href="/cart"><span className="cursorPointer">Carrinho</span></Link> 
+                                    : <Link href="/cart"><span className="cursorPointer"><i className={`fa-solid fa-cart-shopping col-md-2 ${style.userIcons}`}></i></span></Link>
+                                }
                             </li>
                             <li className="nav-item">
-                                <a href=""><i className={`fa-solid fa-user ${style.userIcons}`}></i></a>
+                                {
+                                    isMobile ? <a className="nav-link" href="#">Minha Conta</a> 
+                                    : <a><i className={`fa-solid fa-user ${style.userIcons}`}></i></a>
+                                }
                             </li>
                         </ul>
                     </div>

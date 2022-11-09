@@ -3,6 +3,8 @@ import type { AppProps } from 'next/app'
 import Head from 'next/head';
 import Script from 'next/script';
 import 'devextreme/dist/css/dx.light.css';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
