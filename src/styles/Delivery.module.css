@@ -1,0 +1,25 @@
+.Container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8vh;
+}
+
+.Container .Image {
+    background-image: url('../../public/images/delivery.png');
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 200px;
+    height: 200px;
+}
+
+.Container p.Response {
+    font-size: 1.2rem;
+}
+
+.Container a.Tip {
+    font-size: 0.8rem;
+}

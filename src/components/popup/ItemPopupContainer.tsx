@@ -38,13 +38,15 @@ export const ItemPopupContainer = ({ itemData: { Id, Name, Category, Description
     
         let cart: any = localStorage.getItem('cartItems') || '[]'
         
-        if (cart) {
+        if (cart && Quantity > 0) {
             cart = JSON.parse(cart);
             cart.push({  Id, Name, Description, Image, Price, Quantity });
             localStorage.setItem('cartItems', JSON.stringify(cart));
+            toast.success('Produto adicionado ao carrinho')
             // console.log(JSON.parse(localStorage.getItem('cartItems')))
+        } else {
+            toast.warn('A quantidade do produto precisa ser maior que 0.')
         };
-        toast.success('Produto adicionado ao carrinho')
     
     };
     const [useQuantity, setQuantity] = useState(0);

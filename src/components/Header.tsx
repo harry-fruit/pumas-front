@@ -17,16 +17,16 @@ export const Header = () => {
                             <li className="nav-item">
                                 <a className="nav-link" href="#">Home</a>
                             </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="#">Catalogo</a>
-                            </li>
+                            <Link href="/catalog" className="nav-item">
+                                <a className="nav-link">Catalogo</a>
+                            </Link>
 
                         </ul>
                         <ul className="navbar-nav ms-auto">
                             <li className={`nav-item ${style.marginRight}`}>
                                 {
                                     isMobile ? <Link className="nav-link" href="/cart"><span className="cursorPointer">Carrinho</span></Link> 
-                                    : <Link href="/cart"><span className="cursorPointer"><i className={`fa-solid fa-cart-shopping col-md-2 ${style.userIcons}`}></i></span></Link>
+                                    : <Link href="/cart"><a><span className="cursorPointer"><i className={`fa-solid fa-cart-shopping col-md-2 ${style.userIcons}`}></i></span></a></Link>
                                 }
                             </li>
                             <li className="nav-item">
